@@ -31,44 +31,57 @@ def main():
     fiat = args.fiat
     interval = args.interval
 
-    welcome_msg = f'Listening to {fiat} price of {currency}.'
-    if less_than is not None:
-        welcome_msg += f' If price falls below {less_than}, '
-    if greater_than is not None:
-        welcome_msg += f' If price grow above {greater_than}, '
-
-    welcome_msg += f'command "{command}" will be executed'
-
     opened = False
 
+    os.system('clear')
     while True:
-        os.system('clear')
-
+        print('=' * 80)
         now = datetime.utcnow()
+        execute_it = False
 
+        # price retrieval from binance
         symbol = f'{currency}{fiat}'
         response = requests.get(f'https://api.binance.com/api/v3/ticker/bookTicker?symbol={symbol}')
         bid = response.json()['bidPrice']
         ask = response.json()['askPrice']
-
         price = round((float(bid) + float(ask)) / 2.0, 2)
-        print(f'[{now}]')
-        print(welcome_msg)
-        print(f'Current price: {price}')
+
         if less_than is not None:
             if price < less_than and opened:
-                os.system(command)
+                execute_it = True
                 opened = False
             if price > less_than and not opened:
                 opened = True
 
-        if greater_than is not None:
+        elif greater_than is not None:
             if price > greater_than and opened:
-                os.system(command)
+                execute_it = True
                 opened = False
-            if price < less_than and not opened:
+            if price < greater_than and not opened:
                 opened = True
 
+        welcome_msg = f'- Listening to {fiat} price of {currency}.\n'
+        if less_than is not None:
+            welcome_msg += f'- If price falls below {less_than}, '
+        elif greater_than is not None:
+            welcome_msg += f'- If price grow above {greater_than}, '
+        welcome_msg += f'command "{command}" will be executed.\n'
+        if not opened:
+            if less_than is not None:
+                welcome_msg += f'- Price currently is lesser than {less_than} so doing nothing. ' \
+                               f'Previously need to reach higher values, above {less_than}'
+            elif greater_than is not None:
+                welcome_msg += f'- Price currently is greater than {greater_than} so doing nothing. ' \
+                               f'Previously need to reach lower values, below {greater_than}'
+
+        print(f'[{now}]')
+        print(welcome_msg)
+        print(f'Current price: {price}')
+
+        if execute_it:
+            os.system(command)
+
+        print(f'Waiting {interval} seconds to refetch ...')
         time.sleep(interval)
 
 
