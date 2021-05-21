@@ -24,7 +24,7 @@ optional arguments:
 ```
 
 # Examples
-Executes `panic.sh` when Bitcoin price falls below $30000:
+Executes `panic.sh` when Bitcoin price fall below $30000:
 ```
 python crypto_trigger.py --currency BTC --fiat USDT --lt 30000 "./panic.sh"
 ```
