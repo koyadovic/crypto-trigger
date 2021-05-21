@@ -24,12 +24,12 @@ optional arguments:
 ```
 
 # Examples
-Execute `panic.sh` when Bitcoin price falls below $30000:
+Executes `panic.sh` when Bitcoin price falls below $30000:
 ```
 python crypto_trigger.py --currency BTC --fiat USDT --lt 30000 "./panic.sh"
 ```
 
-Execute `buy_everything_in_the_world.sh` when Bitcoin price raise above $32000:
+Executes `buy_everything_in_the_world.sh` when Bitcoin price raise above $32000:
 ```
 python crypto_trigger.py --currency BTC --fiat USDT --gt 32000 "./buy_everything_in_the_world.sh"
 ```
