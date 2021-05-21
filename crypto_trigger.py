@@ -66,7 +66,7 @@ def main():
         elif greater_than is not None:
             welcome_msg += f'- If price grow above {greater_than}, '
         welcome_msg += f'command "{command}" will be executed.\n'
-        if not opened:
+        if not opened and not execute_it:
             if less_than is not None:
                 welcome_msg += f'- Price currently is lesser than {less_than} so doing nothing. ' \
                                f'Previously need to reach higher values, above {less_than}'
