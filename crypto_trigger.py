@@ -1,10 +1,9 @@
-import argparse
-import os
-import sys
-import time
 from datetime import datetime
 
+import argparse
 import requests
+import time
+import os
 
 
 parser = argparse.ArgumentParser(description='Trigger command after crypto market reach some specific condition.')
