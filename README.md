@@ -33,3 +33,4 @@ Executes `buy_everything_in_the_world.sh` when Bitcoin price raise above $32000:
 ```
 python crypto_trigger.py --currency BTC --fiat USDT --gt 32000 "./buy_everything_in_the_world.sh"
 ```
+**NOTE: The command won't execute if the condition is satisfied just after executed. Previously prices must touch zones where the condition is not meet.** 
