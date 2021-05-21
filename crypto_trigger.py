@@ -35,7 +35,7 @@ def main():
     os.system('clear')
     while True:
         print('=' * 80)
-        now = datetime.utcnow()
+        now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         execute_it = False
 
         # price retrieval from binance
